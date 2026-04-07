@@ -16,9 +16,6 @@ function HomePage() {
           <Button as={Link} to="/game" variant="primary" size="lg">
             Play Now!
           </Button>
-          <Button as={Link} to="/game" variant="outline-dark" size="lg">
-            View Game Page
-          </Button>
         </div>
       </section>
 
