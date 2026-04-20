@@ -68,6 +68,43 @@
   margin-bottom: 0.6rem;
 }
 
+.settings-card {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.settings-actions {
+  margin-top: 2rem;
+}
+
+.difficulty-selector {
+  margin-top: 1.25rem;
+}
+
+.difficulty-options {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.difficulty-info {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.difficulty-pill {
+  background-color: #f3f4f6;
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  min-width: 130px;
+}
+
+.difficulty-pill.selected {
+  background-color: #eef2ff;
+}
+
 .game-alert {
   max-width: 760px;
   margin: 0 auto 1.25rem;
@@ -128,6 +165,10 @@
   justify-content: center;
 }
 
+.game-board-medium {
+  grid-template-columns: repeat(5, minmax(70px, 90px));
+}
+
 .memory-card {
   width: 90px;
   height: 90px;
@@ -173,6 +214,11 @@
   .hero-section,
   .game-header-box {
     padding: 1.5rem 1rem;
+  }
+
+  .difficulty-options,
+  .difficulty-info {
+    flex-direction: column;
   }
 
   .game-board {
