@@ -1,30 +1,102 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert } from 'react-bootstrap';
 import GameBoard from '../components/GameBoard';
 import ScorePanel from '../components/ScorePanel';
 
-const emojis = ['🍎', '🍌', '🍇', '🍒', '🍎', '🍌', '🍇', '🍒'];
+const EMOJI_POOL = [
+  '🍎',
+  '🍌',
+  '🍇',
+  '🍒',
+  '🍉',
+  '🍍',
+  '🥝',
+  '🍓',
+  '🍑',
+  '🍋',
+  '🍊',
+  '🥥',
+  '🍕',
+  '🍔',
+  '🍩',
+  '🍪',
+  '🐶',
+  '🐱',
+  '🐼',
+  '🦊',
+];
 
-function shuffleCards() {
-  return [...emojis]
-    .sort(() => Math.random() - 0.5)
-    .map((emoji, index) => ({
+const DIFFICULTY_CONFIG = {
+  easy: { label: 'Easy', pairs: 4 },
+  medium: { label: 'Medium', pairs: 5 },
+  hard: { label: 'Hard', pairs: 6 },
+};
+
+function getSavedDifficulty() {
+  return localStorage.getItem('memory-game-difficulty') || 'easy';
+}
+
+function shuffleArray(items) {
+  return [...items].sort(() => Math.random() - 0.5);
+}
+
+function generateCards(difficulty) {
+  const pairCount = DIFFICULTY_CONFIG[difficulty].pairs;
+  const selectedEmojis = shuffleArray(EMOJI_POOL).slice(0, pairCount);
+
+  return shuffleArray([...selectedEmojis, ...selectedEmojis]).map(
+    (emoji, index) => ({
       id: index,
       emoji,
       flipped: false,
       matched: false,
-    }));
+    })
+  );
 }
 
 function GamePage() {
-  const [cards, setCards] = useState(() => shuffleCards());
+  const [difficulty, setDifficulty] = useState(getSavedDifficulty);
+  const [cards, setCards] = useState(() => generateCards(getSavedDifficulty()));
   const [moves, setMoves] = useState(0);
   const [isChecking, setIsChecking] = useState(false);
+  const [bestScore, setBestScore] = useState(null);
   const timerRef = useRef(null);
 
-  const totalPairs = emojis.length / 2;
+  const totalPairs = DIFFICULTY_CONFIG[difficulty].pairs;
   const matchedPairs = cards.filter((card) => card.matched).length / 2;
   const isGameComplete = matchedPairs === totalPairs;
+
+  const difficultyLabel = useMemo(
+    () => DIFFICULTY_CONFIG[difficulty].label,
+    [difficulty]
+  );
+
+  useEffect(() => {
+    const savedDifficulty = getSavedDifficulty();
+    setDifficulty(savedDifficulty);
+    setCards(generateCards(savedDifficulty));
+    setMoves(0);
+    setIsChecking(false);
+  }, []);
+
+  useEffect(() => {
+    const savedBestScore = localStorage.getItem(
+      `memory-game-best-score-${difficulty}`
+    );
+
+    setBestScore(savedBestScore ? Number(savedBestScore) : null);
+  }, [difficulty]);
+
+  useEffect(() => {
+    if (
+      isGameComplete &&
+      moves > 0 &&
+      (bestScore === null || moves < bestScore)
+    ) {
+      localStorage.setItem(`memory-game-best-score-${difficulty}`, moves);
+      setBestScore(moves);
+    }
+  }, [isGameComplete, moves, bestScore, difficulty]);
 
   useEffect(() => {
     return () => {
@@ -84,8 +156,11 @@ function GamePage() {
   };
 
   const handleRestart = () => {
+    const savedDifficulty = getSavedDifficulty();
+
     window.clearTimeout(timerRef.current);
-    setCards(shuffleCards());
+    setDifficulty(savedDifficulty);
+    setCards(generateCards(savedDifficulty));
     setMoves(0);
     setIsChecking(false);
   };
@@ -101,7 +176,8 @@ function GamePage() {
 
       {isGameComplete && (
         <Alert variant="success" className="game-alert">
-          You matched all pairs in {moves} moves. Great job!
+          You matched all pairs in {moves} moves on {difficultyLabel}. Great
+          job!
         </Alert>
       )}
 
@@ -109,6 +185,8 @@ function GamePage() {
         moves={moves}
         matchedPairs={matchedPairs}
         totalPairs={totalPairs}
+        difficultyLabel={difficultyLabel}
+        bestScore={bestScore}
         onRestart={handleRestart}
       />
 

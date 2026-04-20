@@ -16,6 +16,9 @@ function HomePage() {
           <Button as={Link} to="/game" variant="primary" size="lg">
             Play Now!
           </Button>
+          <Button as={Link} to="/settings" variant="outline-primary" size="lg">
+            Settings
+          </Button>
         </div>
       </section>
 
@@ -28,6 +31,7 @@ function HomePage() {
             <li>If the two cards match, they stay visible.</li>
             <li>If they do not match, they flip back after a short delay.</li>
             <li>Match all pairs to win the game!</li>
+            <li>Try different difficulty levels in the settings page.</li>
           </ul>
         </Card.Body>
       </Card>

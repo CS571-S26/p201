@@ -3,6 +3,7 @@ import './App.css';
 import NavigationBar from './components/NavigationBar';
 import HomePage from './pages/HomePage';
 import GamePage from './pages/GamePage';
+import SettingsPage from './pages/SettingsPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/game" element={<GamePage />} />
+          <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </main>

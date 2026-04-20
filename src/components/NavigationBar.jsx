@@ -19,6 +19,9 @@ function NavigationBar() {
             <Nav.Link as={NavLink} to="/game">
               Game
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/settings">
+              Settings
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
