@@ -1,12 +1,15 @@
 import { Button, Card } from 'react-bootstrap';
 import BestScore from './BestScore';
+import TimerDisplay from './TimerDisplay';
 
 function ScorePanel({
   moves,
   matchedPairs,
   totalPairs,
   difficultyLabel,
+  cardSetLabel,
   bestScore,
+  secondsElapsed,
   onRestart,
 }) {
   return (
@@ -19,6 +22,13 @@ function ScorePanel({
                 <span className="score-label">Difficulty</span>
                 <span className="score-value">{difficultyLabel}</span>
               </div>
+
+              <div className="score-pill">
+                <span className="score-label">Card Set</span>
+                <span className="score-value">{cardSetLabel}</span>
+              </div>
+
+              <TimerDisplay secondsElapsed={secondsElapsed} />
 
               <div className="score-pill">
                 <span className="score-label">Moves</span>

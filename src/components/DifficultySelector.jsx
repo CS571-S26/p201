@@ -7,30 +7,43 @@ const DIFFICULTIES = [
   { key: 'hard', label: 'Hard', cards: 12 },
 ];
 
-function DifficultySelector() {
-  const [selectedDifficulty, setSelectedDifficulty] = useState('easy');
+function DifficultySelector({ selectedDifficulty, onDifficultyChange }) {
+  const [currentDifficulty, setCurrentDifficulty] = useState(
+    selectedDifficulty || 'easy'
+  );
 
   useEffect(() => {
     const savedDifficulty = localStorage.getItem('memory-game-difficulty');
 
     if (savedDifficulty) {
-      setSelectedDifficulty(savedDifficulty);
+      setCurrentDifficulty(savedDifficulty);
     }
   }, []);
 
+  useEffect(() => {
+    if (selectedDifficulty) {
+      setCurrentDifficulty(selectedDifficulty);
+    }
+  }, [selectedDifficulty]);
+
   const handleSelectDifficulty = (difficulty) => {
-    setSelectedDifficulty(difficulty);
+    setCurrentDifficulty(difficulty);
     localStorage.setItem('memory-game-difficulty', difficulty);
+    onDifficultyChange?.(difficulty);
   };
 
   return (
     <div className="difficulty-selector">
-      <div className="difficulty-options">
+      <div
+        className="difficulty-options"
+        role="group"
+        aria-label="Difficulty options"
+      >
         {DIFFICULTIES.map((difficulty) => (
           <Button
             key={difficulty.key}
             variant={
-              selectedDifficulty === difficulty.key
+              currentDifficulty === difficulty.key
                 ? 'primary'
                 : 'outline-primary'
             }
@@ -46,7 +59,7 @@ function DifficultySelector() {
           <div
             key={difficulty.key}
             className={`difficulty-pill ${
-              selectedDifficulty === difficulty.key ? 'selected' : ''
+              currentDifficulty === difficulty.key ? 'selected' : ''
             }`}
           >
             <span className="score-label">{difficulty.label}</span>
