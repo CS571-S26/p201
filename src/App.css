@@ -232,3 +232,207 @@
     font-size: 1.6rem;
   }
 }
+
+.app-theme {
+  min-height: 100vh;
+  background-color: #f6f7fb;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.settings-option-list {
+  max-width: 760px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.settings-option-card {
+  overflow: hidden;
+}
+
+.settings-option-header {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 1.25rem 1.35rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.settings-option-header:hover {
+  background-color: #f9fafb;
+}
+
+.settings-option-copy {
+  flex: 1;
+}
+
+.settings-option-title {
+  font-size: 1.25rem;
+  margin: 0 0 0.35rem;
+  color: #111827;
+}
+
+.settings-option-description {
+  margin: 0;
+  color: #6b7280;
+}
+
+.settings-option-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  white-space: nowrap;
+}
+
+.settings-option-summary {
+  background-color: #eef2ff;
+  color: #111827;
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-weight: 700;
+}
+
+.settings-option-icon {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.settings-option-body {
+  border-top: 1px solid #e5e7eb;
+  padding: 1.25rem 1.35rem 1.35rem;
+}
+
+.selector-options {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.card-set-preview {
+  font-size: 1.05rem;
+  letter-spacing: 0.05rem;
+}
+
+.theme-description {
+  display: block;
+  font-weight: 600;
+  color: #111827;
+}
+
+.timer-pill {
+  background-color: #fff7ed;
+}
+
+.app-theme-dark {
+  background-color: #0f172a;
+  color: #e5e7eb;
+}
+
+.app-theme-dark .hero-section,
+.app-theme-dark .game-header-box,
+.app-theme-dark .feature-card,
+.app-theme-dark .score-card,
+.app-theme-dark .memory-card {
+  background-color: #1f2937;
+  color: #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.app-theme-dark .display-title,
+.app-theme-dark .settings-option-title,
+.app-theme-dark .score-value,
+.app-theme-dark .theme-description {
+  color: #f9fafb;
+}
+
+.app-theme-dark .lead-text,
+.app-theme-dark .feature-list,
+.app-theme-dark .settings-option-description,
+.app-theme-dark .score-label,
+.app-theme-dark .settings-option-icon {
+  color: #cbd5e1;
+}
+
+.app-theme-dark .settings-option-header:hover {
+  background-color: #111827;
+}
+
+.app-theme-dark .settings-option-body {
+  border-top-color: #374151;
+}
+
+.app-theme-dark .score-pill,
+.app-theme-dark .difficulty-pill,
+.app-theme-dark .settings-option-summary {
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+.app-theme-dark .difficulty-pill.selected {
+  background-color: #312e81;
+}
+
+.app-theme-dark .timer-pill {
+  background-color: #7c2d12;
+}
+
+.app-theme-dark .memory-card.flipped {
+  background-color: #1e3a8a;
+}
+
+.app-theme-dark .memory-card.matched {
+  background-color: #064e3b;
+}
+
+@media (max-width: 576px) {
+  .settings-option-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .settings-option-meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.score-panel {
+  max-width: 980px;
+}
+
+.score-grid {
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.score-items {
+  flex: 1;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+}
+
+.score-pill {
+  min-width: 115px;
+}
+
+.score-grid .btn {
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .score-grid {
+    flex-wrap: wrap;
+  }
+
+  .score-items {
+    flex-wrap: wrap;
+  }
+}

@@ -31,8 +31,7 @@ function HomePage() {
             <li>If the two cards match, they stay visible.</li>
             <li>If they do not match, they flip back after a short delay.</li>
             <li>Match all pairs to win the game!</li>
-            <li>Try different difficulty levels in the settings page.</li>
-          </ul>
+            <li>Try different difficulty levels and card sets in the settings page!</li>          </ul>
         </Card.Body>
       </Card>
     </div>
